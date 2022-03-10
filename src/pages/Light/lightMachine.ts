@@ -1,7 +1,7 @@
 import { createMachine } from 'xstate';
 
 export const LIGHT_STATES = {
-  RED: 'RED',
+  RED: 'red',
   GREEN: 'green',
   YELLOW: 'yellow',
 };
