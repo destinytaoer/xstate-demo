@@ -1,12 +1,15 @@
-import Light from './pages/Light';
-import Counter from './pages/Counter';
+import { Routes, Route } from 'react-router-dom';
+import Example from './pages/Example/Route';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <div className="App">
-      Learn XState
-      <Light />
-      <Counter />
+    <div className="app">
+      <h1>Learn XState</h1>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="example/*" element={<Example />} />
+      </Routes>
     </div>
   );
 }
