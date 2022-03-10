@@ -1,24 +1,24 @@
+import { useMachine } from '@xstate/react';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { LightMachine, LIGHT_EVENTS, LIGHT_STATES } from './model/lightMachine';
 
 function App() {
+  const [state, send] = useMachine(LightMachine);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      Learn XState
+      <div>
+        {state.matches(LIGHT_STATES.RED) && <span>red</span>}
+        {state.matches(LIGHT_STATES.GREEN) && <span>green</span>}
+        {state.matches(LIGHT_STATES.YELLOW) && <span>yellow</span>}
+        <button
+          onClick={() => {
+            send(LIGHT_EVENTS.CLICK);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          click me
+        </button>
+      </div>
     </div>
   );
 }
