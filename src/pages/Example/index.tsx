@@ -7,8 +7,9 @@ const Example: FC<IExampleProps> = (props) => {
   return (
     <div>
       <h2>Example</h2>
-      <Link to="/example/light">light demo</Link>
-      <Link to="/example/counter">counter demo</Link>
+      <Link to="/example/light">light demo</Link> <br />
+      <Link to="/example/counter">counter demo</Link> <br />
+      <Link to="/example/temperature">temperature demo</Link> <br />
     </div>
   );
 };
