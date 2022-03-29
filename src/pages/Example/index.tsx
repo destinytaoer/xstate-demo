@@ -9,7 +9,8 @@ const Example: FC<IExampleProps> = (props) => {
       <h2>Example</h2>
       <Link to="/example/light">light demo</Link> <br />
       <Link to="/example/counter">counter demo</Link> <br />
-      <Link to="/example/temperature">temperature demo</Link> <br />
+        <Link to="/example/temperature">temperature demo</Link> <br />
+        <Link to="/example/flightbook">flightbook demo</Link> <br />
     </div>
   );
 };
