@@ -1,5 +1,5 @@
 import { useMachine } from '@xstate/react';
-import { TemperatureMachine } from './temperatureMachine';
+import { TEMPERATURE_EVENTS, TemperatureMachine } from './temperatureMachine';
 
 export default function Temperature() {
   const [state, send] = useMachine(TemperatureMachine);
@@ -16,7 +16,7 @@ export default function Temperature() {
             id="celsius"
             value={C ?? ''}
             onChange={(e) => {
-              send('CELSIUS', { value: e.target.value });
+                send(TEMPERATURE_EVENTS.CELSIUS, { value: e.target.value });
             }}
             placeholder="e.g., 0"
           />
@@ -29,7 +29,7 @@ export default function Temperature() {
             id="fahrenheit"
             value={F ?? ''}
             onChange={(e) => {
-              send('FAHRENHEIT', { value: e.target.value });
+                send(TEMPERATURE_EVENTS.FAHRENHEIT, { value: e.target.value });
             }}
             placeholder="e.g., 32"
           />

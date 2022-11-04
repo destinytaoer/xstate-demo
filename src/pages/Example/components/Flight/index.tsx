@@ -39,7 +39,7 @@ const Flight: FC<IFlightProps> = (props) => {
           />
           <button
             type="button"
-            onClick={() => send('SUBMIT')}
+            onClick={() => send(FLIGHT_EVENTS.SUBMIT)}
             disabled={!canSubmit}
             data-state={state.toStrings().join(' ')}
           >

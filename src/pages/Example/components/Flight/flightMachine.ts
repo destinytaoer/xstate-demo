@@ -26,43 +26,44 @@ export const FlightMachine = createMachine<FlightContext>({
     trip: 'oneWay',
   },
   states: {
-    [FLIGHT_STATES.EDITING]: {
-      on: {
-        [FLIGHT_EVENTS.SET_TRIP]: {
-          actions: assign({
-            trip: (_, event) => event.value,
-          }),
-          cond: (_, event) => event.value === 'oneWay' || event.value === 'roundTrip',
-        },
-        [FLIGHT_EVENTS.SET_START_DATE]: {
-          actions: assign({
-            startDate: (_, event) => event.value,
-          }),
-        },
-        [FLIGHT_EVENTS.SET_RETURN_DATE]: {
-          actions: assign({
-            returnDate: (_, event) => event.value,
-          }),
-          cond: (context) => context.trip === 'roundTrip',
-        },
-        [FLIGHT_EVENTS.SUBMIT]: {
-          target: FLIGHT_STATES.SUBMITTED,
-          cond: (context) => {
-            if (context.trip === 'oneWay') {
-              return !!context.startDate;
-            } else {
-              return (
-                !!context.startDate &&
-                !!context.returnDate &&
-                context.returnDate > context.startDate
-              );
-            }
-          },
-        },
+      [FLIGHT_STATES.EDITING]: {
+          on: {
+              [FLIGHT_EVENTS.SUBMIT]: {
+                 target: FLIGHT_STATES.SUBMITTED,
+                  cond: (context) => {
+                     if (context.trip === 'oneWay') {
+                         return !!context.startDate
+                     }
+                      return !!context.startDate && !!context.returnDate && context.returnDate > context.startDate
+                 }
+              },
+              [FLIGHT_EVENTS.SET_TRIP]: {
+                  actions: 'setTrip',
+                  cond: (_, event) => event.value === 'oneWay' || event.value === 'roundTrip',
+              },
+              [FLIGHT_EVENTS.SET_START_DATE]: {
+                  actions: 'setStartDate',
+              },
+              [FLIGHT_EVENTS.SET_RETURN_DATE]: {
+                  actions: 'setReturnDate',
+                  cond: (context) => context.trip === 'roundTrip',
+              },
+          }
       },
-    },
-    [FLIGHT_STATES.SUBMITTED]: {
-      type: 'final',
-    },
+      [FLIGHT_STATES.SUBMITTED]: {
+          type: 'final'
+      }
   },
+}, {
+    actions: {
+        setTrip:   assign({
+            trip: (_, event) => event.value,
+        }),
+        setStartDate: assign({
+            startDate: (_, event) => event.value,
+        }),
+        setReturnDate: assign({
+            returnDate: (_, event) => event.value,
+        }),
+    }
 });
